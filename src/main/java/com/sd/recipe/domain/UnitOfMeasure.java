@@ -13,6 +13,7 @@ public class UnitOfMeasure {
     private Long id;
 
     private String description;
+    private String description1;
 
     public Long getId() {
         return id;
@@ -28,5 +29,13 @@ public class UnitOfMeasure {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
     }
 }
