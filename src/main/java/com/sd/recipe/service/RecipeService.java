@@ -1,6 +1,7 @@
 package com.sd.recipe.service;
 
 
+import com.sd.recipe.commands.RecipeCommand;
 import com.sd.recipe.domain.Recipe;
 
 import java.util.Set;
@@ -14,4 +15,6 @@ public interface RecipeService {
     Set<Recipe> getRecipes();
 
     Recipe findById(Long id);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 }
