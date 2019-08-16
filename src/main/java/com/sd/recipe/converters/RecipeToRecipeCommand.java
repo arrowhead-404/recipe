@@ -1,6 +1,5 @@
 package com.sd.recipe.converters;
 
-
 import com.sd.recipe.commands.RecipeCommand;
 import com.sd.recipe.domain.Category;
 import com.sd.recipe.domain.Recipe;
@@ -44,6 +43,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
         command.setServings(source.getServings());
         command.setSource(source.getSource());
         command.setUrl(source.getUrl());
+        command.setImage(source.getImage());
         command.setNotes(notesConverter.convert(source.getNotes()));
 
         if (source.getCategories() != null && source.getCategories().size() > 0){
