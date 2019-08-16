@@ -1,14 +1,20 @@
 package com.sd.recipe.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 6/13/17.
+ */
+@Getter
+@Setter
 @Entity
-@Data
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,11 +47,9 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-
-
     public void setNotes(Notes notes) {
-        this.notes = notes;
-        if(notes!=null){
+        if (notes != null) {
+            this.notes = notes;
             notes.setRecipe(this);
         }
     }

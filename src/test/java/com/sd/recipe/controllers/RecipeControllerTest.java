@@ -18,36 +18,38 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 public class RecipeControllerTest {
+
     @Mock
     RecipeService recipeService;
 
-    RecipeController recipeController;
+    RecipeController controller;
+
     MockMvc mockMvc;
-    @Mock
-    Model model;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeController = new RecipeController(recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+        controller = new RecipeController(recipeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-
     @Test
-    public void testGetRecipe() throws Exception
-    {
-        Recipe recipe=new Recipe();
-        recipe.setId(1L);
-        when(recipeService.findById(any())).thenReturn(recipe);
+    public void testGetRecipe() throws Exception {
 
-        mockMvc.perform(get("/recipe/1/show")).andExpect(status().isOk()).andExpect(view().name("recipe/show")).andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenReturn(recipe);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/show"))
+                .andExpect(model().attributeExists("recipe"));
     }
 
     @Test
@@ -57,9 +59,8 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
+                .andExpect(model().attributeExists("recipe"));
     }
-
 
     @Test
     public void testPostNewRecipeForm() throws Exception {
@@ -87,7 +88,7 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/1/update"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
+                .andExpect(model().attributeExists("recipe"));
     }
 
     @Test

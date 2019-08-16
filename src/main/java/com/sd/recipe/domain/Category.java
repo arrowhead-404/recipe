@@ -1,11 +1,17 @@
 package com.sd.recipe.domain;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+/**
+ * Created by jt on 6/13/17.
+ */
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"recipes"})
 @Entity
 public class Category {
